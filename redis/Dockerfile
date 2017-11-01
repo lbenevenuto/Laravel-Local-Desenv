@@ -1,2 +1,2 @@
-FROM        redis:latest
+FROM        redis:alpine
 MAINTAINER  Luiz Benevenuto <luiz@siffra.com.br>
