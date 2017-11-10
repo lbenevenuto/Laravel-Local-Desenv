@@ -1,2 +1,2 @@
-FROM        dpage/pgadmin4
+FROM        nginx:alpine
 MAINTAINER  Luiz Benevenuto <luiz@siffra.com.br>

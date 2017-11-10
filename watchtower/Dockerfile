@@ -1,2 +1,2 @@
-FROM        dpage/pgadmin4
+FROM        v2tec/watchtower
 MAINTAINER  Luiz Benevenuto <luiz@siffra.com.br>

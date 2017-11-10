@@ -3,7 +3,9 @@ version: "3"
 services:
     mysql:
         build: mysql
+        container_name: "mysql"
         domainname: siffra.local
+        image: lbenevenuto/mysql
         hostname: mysql
         privileged: true
         environment: 
@@ -14,6 +16,7 @@ services:
             - mysql-data:/var/lib/mysql
     postgres:
         build: postgres
+        container_name: "postgres"
         domainname: siffra.local
         hostname: postgres
         privileged: true
@@ -26,6 +29,7 @@ services:
             - postgres-data:/var/lib/postgresql/data
     redis:
         build: redis
+        container_name: "redis"
         domainname: siffra.local
         hostname: redis
         privileged: true
@@ -35,6 +39,7 @@ services:
             - redis-data:/data
     pgadmin:
         build: pgadmin
+        container_name: "pgadmin"
         domainname: siffra.local
         hostname: pgadmin
         privileged: true
@@ -47,9 +52,29 @@ services:
             - pgadmin-data:/var/lib/pgadmin
         depends_on: 
             - postgres
+    portainer:
+        build: portainer
+        container_name: "portainer-app"
+        domainname: siffra.local
+        #Automatically choose 'Manage the Docker instance where Portainer is running' by adding <--host=unix:///var/run/docker.sock> to the command
+        command: --host=unix:///var/run/docker.sock
+        ports: 
+        - "9000:9000"
+        volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - portainer_data:/data
+
+    watchtower:
+        build: watchtower
+        container_name: "portainer-watchtower"
+        domainname: siffra.local
+        command: --cleanup portainer-app portainer-watchtower --interval 30 --debug
+        volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
     redis-data:
     postgres-data:
     mysql-data:
     pgadmin-data:
+    portainer_data:
