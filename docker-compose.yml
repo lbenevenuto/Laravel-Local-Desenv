@@ -28,6 +28,7 @@ services:
             - postgres-data:/var/lib/postgresql/data
     redis:
         build: redis
+        #image: redis:alpine
         container_name: "redis"
         domainname: siffra.local
         hostname: redis
@@ -63,13 +64,14 @@ services:
         - /var/run/docker.sock:/var/run/docker.sock
         - portainer_data:/data
 
-    watchtower:
-        build: watchtower
-        container_name: "watchtower"
-        domainname: siffra.local
-        command: --cleanup portainer watchtower --interval 30 --debug
-        volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
+    # watchtower:
+    #     build: watchtower
+    #     container_name: "watchtower"
+    #     domainname: siffra.local
+    #     command: --interval 30 --cleanup --debug
+    #     volumes:
+    #     - /var/run/docker.sock:/var/run/docker.sock
+    #     - ~/.docker/config.json:/config.json
 
 volumes:
     redis-data:
