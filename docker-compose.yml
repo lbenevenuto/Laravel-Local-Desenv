@@ -5,7 +5,6 @@ services:
         build: mysql
         container_name: "mysql"
         domainname: siffra.local
-        image: lbenevenuto/mysql
         hostname: mysql
         privileged: true
         environment: 
@@ -54,7 +53,7 @@ services:
             - postgres
     portainer:
         build: portainer
-        container_name: "portainer-app"
+        container_name: "portainer"
         domainname: siffra.local
         #Automatically choose 'Manage the Docker instance where Portainer is running' by adding <--host=unix:///var/run/docker.sock> to the command
         command: --host=unix:///var/run/docker.sock
@@ -66,9 +65,9 @@ services:
 
     watchtower:
         build: watchtower
-        container_name: "portainer-watchtower"
+        container_name: "watchtower"
         domainname: siffra.local
-        command: --cleanup portainer-app portainer-watchtower --interval 30 --debug
+        command: --cleanup portainer watchtower --interval 30 --debug
         volumes:
         - /var/run/docker.sock:/var/run/docker.sock
 
