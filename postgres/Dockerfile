@@ -1,5 +1,5 @@
-FROM        postgres:alpine
-MAINTAINER  Luiz Benevenuto <luiz@siffra.com.br>
+FROM postgres:alpine
+LABEL maintainer="Luiz Benevenuto <luiz@siffra.com.br>"
 
 RUN apk add --update --no-cache tzdata
 

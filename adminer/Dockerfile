@@ -1,2 +1,2 @@
-FROM        portainer/portainer
+from adminer
 LABEL maintainer="Luiz Benevenuto <luiz@siffra.com.br>"

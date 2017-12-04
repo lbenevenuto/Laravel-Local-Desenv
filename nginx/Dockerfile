@@ -1,2 +1,2 @@
-FROM        nginx:alpine
-MAINTAINER  Luiz Benevenuto <luiz@siffra.com.br>
+FROM nginx:alpine
+LABEL maintainer="Luiz Benevenuto <luiz@siffra.com.br>"

@@ -1,2 +1,2 @@
-FROM        redis:alpine
-MAINTAINER  Luiz Benevenuto <luiz@siffra.com.br>
+FROM redis:alpine
+LABEL maintainer="Luiz Benevenuto <luiz@siffra.com.br>"

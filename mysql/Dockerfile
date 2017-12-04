@@ -1,2 +1,2 @@
-FROM        mysql:latest
-MAINTAINER  Luiz Benevenuto <luiz@siffra.com.br>
+FROM mysql:latest
+LABEL maintainer="Luiz Benevenuto <luiz@siffra.com.br>"

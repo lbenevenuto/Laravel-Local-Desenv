@@ -52,6 +52,28 @@ services:
             - pgadmin-data:/var/lib/pgadmin
         depends_on: 
             - postgres
+    phpmyadmin:
+        build: phpmyadmin
+        container_name: phpmyadmin
+        domainname: siffra.local
+        environment:
+            - PMA_ARBITRARY=0
+            - PMA_HOST=mysql
+            - PMA_USER=root
+            - PMA_PASSWORD=123456
+            - MYSQL_ROOT_PASSWORD=123456
+        restart: always
+        ports:
+            - 8081:80
+        volumes:
+            - phpmyadmin-data:/sessions
+    adminer:
+        build: adminer
+        container_name: adminer
+        domainname: siffra.local
+        restart: always
+        ports:
+            - 8082:8080
     portainer:
         build: portainer
         container_name: "portainer"
@@ -59,10 +81,10 @@ services:
         #Automatically choose 'Manage the Docker instance where Portainer is running' by adding <--host=unix:///var/run/docker.sock> to the command
         command: --host=unix:///var/run/docker.sock
         ports: 
-        - "9000:9000"
+            - "9000:9000"
         volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - portainer_data:/data
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer-data:/data
 
     # watchtower:
     #     build: watchtower
@@ -78,4 +100,6 @@ volumes:
     postgres-data:
     mysql-data:
     pgadmin-data:
-    portainer_data:
+    phpmyadmin-data:
+    portainer-data:
+    adminer-data:

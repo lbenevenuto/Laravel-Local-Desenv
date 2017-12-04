@@ -1,2 +1,2 @@
-FROM        dpage/pgadmin4
-MAINTAINER  Luiz Benevenuto <luiz@siffra.com.br>
+FROM dpage/pgadmin4
+LABEL maintainer="Luiz Benevenuto <luiz@siffra.com.br>"
