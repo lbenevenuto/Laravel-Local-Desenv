@@ -86,6 +86,13 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
             - portainer-data:/data
 
+    mailhog:
+        image: mailhog/mailhog
+        container_name: "mailhog"
+        domainname: siffra.local
+        ports: 
+            - 1025:1025
+            - 8025:8025
     # watchtower:
     #     build: watchtower
     #     container_name: "watchtower"
