@@ -13,6 +13,8 @@ services:
             - "3306:3306"
         volumes:
             - mysql-data:/var/lib/mysql
+        networks: 
+            - laravel
     postgres:
         build: postgres
         container_name: "postgres"
@@ -26,6 +28,8 @@ services:
             - "5432:5432"
         volumes:
             - postgres-data:/var/lib/postgresql/data
+        networks: 
+            - laravel
     redis:
         build: redis
         container_name: "redis"
@@ -36,6 +40,9 @@ services:
             - "6379:6379"
         volumes:
             - redis-data:/data
+        networks: 
+            - laravel
+            
     pgadmin:
         build: pgadmin
         container_name: "pgadmin"
@@ -51,6 +58,9 @@ services:
             - pgadmin-data:/var/lib/pgadmin
         depends_on: 
             - postgres
+        networks: 
+            - laravel
+
     phpmyadmin:
         build: phpmyadmin
         container_name: phpmyadmin
@@ -66,6 +76,9 @@ services:
             - 8081:80
         volumes:
             - phpmyadmin-data:/sessions
+        networks: 
+            - laravel
+            
     adminer:
         build: adminer
         container_name: adminer
@@ -73,6 +86,9 @@ services:
         restart: always
         ports:
             - 8082:8080
+        networks: 
+            - laravel
+            
     portainer:
         build: portainer
         container_name: "portainer"
@@ -84,7 +100,9 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - portainer-data:/data
-
+        networks: 
+            - laravel
+    
     mailhog:
         image: mailhog/mailhog
         container_name: "mailhog"
@@ -92,6 +110,8 @@ services:
         ports: 
             - 1025:1025
             - 8025:8025
+        networks: 
+            - laravel
     # watchtower:
     #     build: watchtower
     #     container_name: "watchtower"
@@ -109,3 +129,7 @@ volumes:
     phpmyadmin-data:
     portainer-data:
     adminer-data:
+
+networks: 
+    laravel:
+        driver: bridge
