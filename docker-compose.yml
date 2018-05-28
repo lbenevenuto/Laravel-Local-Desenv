@@ -65,6 +65,29 @@ services:
         networks: 
             - laravel
 
+    metabase:
+        build: metabase
+        restart: always
+        container_name: metabase
+        domainname: siffra.local
+        hostname: metabase
+        privileged: true
+        environment: 
+            - MB_DB_TYPE=postgres
+            - MB_DB_DBNAME=metabase
+            - MB_DB_PORT=5432
+            - MB_DB_USER=metabase
+            - MB_DB_PASS=metabase@1
+            - MB_DB_HOST=postgres
+        ports:
+            - "3000:3000"
+        volumes:
+            - metabase-data:/metabase-data
+        depends_on: 
+            - postgres
+        networks: 
+            - laravel
+
     phpmyadmin:
         build: phpmyadmin
         restart: always
@@ -137,6 +160,7 @@ volumes:
     phpmyadmin-data:
     portainer-data:
     adminer-data:
+    metabase-data:
 
 networks: 
     laravel:
