@@ -1,4 +1,4 @@
-version: "3"
+version: "3.4"
 
 services:
     mysql:
@@ -11,11 +11,28 @@ services:
         environment: 
             - MYSQL_ROOT_PASSWORD=123456
         ports:
-            - "3306:3306"
+            - "3307:3306"
         volumes:
             - mysql-data:/var/lib/mysql
         networks: 
             - laravel
+
+    mariadb:
+        build: mariadb
+        restart: always
+        container_name: "mariadb"
+        domainname: siffra.local
+        hostname: mariadb
+        privileged: true
+        environment: 
+            - MYSQL_ROOT_PASSWORD=123456
+        ports:
+            - "3306:3306"
+        volumes:
+            - mariadb-data:/var/lib/mariadb
+        networks: 
+            - laravel
+
     postgres:
         build: postgres
         restart: always
@@ -32,6 +49,7 @@ services:
             - postgres-data:/var/lib/postgresql/data
         networks: 
             - laravel
+
     redis:
         build: redis
         restart: always
@@ -95,7 +113,7 @@ services:
         domainname: siffra.local
         environment:
             - PMA_ARBITRARY=0
-            - PMA_HOST=mysql
+            - PMA_HOST=mariadb
             - PMA_USER=root
             - PMA_PASSWORD=123456
             - MYSQL_ROOT_PASSWORD=123456
@@ -156,6 +174,7 @@ volumes:
     redis-data:
     postgres-data:
     mysql-data:
+    mariadb-data:
     pgadmin-data:
     phpmyadmin-data:
     portainer-data:
