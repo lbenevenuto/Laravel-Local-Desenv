@@ -1,21 +1,21 @@
 version: "3.4"
 
 services:
-    mysql:
-        build: mysql
-        restart: always
-        container_name: "mysql"
-        domainname: siffra.local
-        hostname: mysql
-        privileged: true
-        environment: 
-            - MYSQL_ROOT_PASSWORD=123456
-        ports:
-            - "3307:3306"
-        volumes:
-            - mysql-data:/var/lib/mysql
-        networks: 
-            - laravel
+    # mysql:
+    #     build: mysql
+    #     restart: always
+    #     container_name: "mysql"
+    #     domainname: siffra.local
+    #     hostname: mysql
+    #     privileged: true
+    #     environment: 
+    #         - MYSQL_ROOT_PASSWORD=123456
+    #     ports:
+    #         - "3307:3306"
+    #     volumes:
+    #         - mysql-data:/var/lib/mysql
+    #     networks: 
+    #         - laravel
 
     mariadb:
         build: mariadb
