@@ -33,6 +33,7 @@ services:
         volumes: 
             - pgadmin-data:/var/lib/pgadmin
             - "./postgres/backup:/backup"
+            - "./postgres/backup:/var/lib/pgadmin/storage/luiz/"
         depends_on: 
             - postgres
         networks: 
