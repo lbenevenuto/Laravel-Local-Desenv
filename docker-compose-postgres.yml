@@ -42,7 +42,7 @@ services:
         container_name: "portainer"
         domainname: siffra.local
         #Automatically choose 'Manage the Docker instance where Portainer is running' by adding <--host=unix:///var/run/docker.sock> to the command
-        command: --host=unix:///var/run/docker.sock
+        command: --admin-password '$$2y$$05$$3rE5ISa6vM.Jep6lRumx8OW6oLw.UcRsqvAQkBVm8/R1INX0FqBQC'
         ports: 
             - "9000:9000"
         volumes:
