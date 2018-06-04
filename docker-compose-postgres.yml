@@ -1,0 +1,61 @@
+version: "3.4"
+
+services:
+    postgres:
+        build: postgres
+        restart: always
+        container_name: "postgres"
+        domainname: siffra.local
+        hostname: postgres
+        privileged: true
+        environment: 
+            - POSTGRES_PASSWD=123456
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        networks: 
+            - laravel
+
+    pgadmin:
+        build: pgadmin
+        restart: always
+        container_name: "pgadmin"
+        domainname: siffra.local
+        hostname: pgadmin
+        privileged: true
+        environment: 
+            - PGADMIN_DEFAULT_EMAIL=luiz@siffra.com.br
+            - PGADMIN_DEFAULT_PASSWORD=123
+        ports: 
+            - "8080:80"
+        volumes: 
+            - pgadmin-data:/var/lib/pgadmin
+        depends_on: 
+            - postgres
+        networks: 
+            - laravel
+
+    portainer:
+        build: portainer
+        restart: always
+        container_name: "portainer"
+        domainname: siffra.local
+        #Automatically choose 'Manage the Docker instance where Portainer is running' by adding <--host=unix:///var/run/docker.sock> to the command
+        command: --host=unix:///var/run/docker.sock --no-auth
+        ports: 
+            - "9000:9000"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer-data:/data
+        networks: 
+            - laravel
+
+volumes:
+    postgres-data:
+    pgadmin-data:
+    portainer-data:
+
+networks: 
+    laravel:
+        driver: bridge
